@@ -1,0 +1,21 @@
+@DATABASE = erhemunerar
+@TABELA = funcionarios
+-- 
+CREATE database erhemunerar;
+
+--
+USE erhemunerar;
+
+--
+CREATE TABLE funcionarios (
+    ID int PRIMARY KEY AUTO_INCREMENT,
+    Name varchar(45) not null,
+    SecondName varchar(45) not null,
+    Idade int not null,
+    DataAdmissao date not null,
+    Area varchar(45) not null,
+    Salario float not null
+);
+
+--
+select * from funcionarios;
