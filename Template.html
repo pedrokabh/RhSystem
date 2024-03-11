@@ -21,24 +21,64 @@
         <!-- SEÇÃO CADASTRO -->
         <div class="CadastroFuncionario">
             <h1 class="d-flex justify-content-center">RH Coorporate Ltda</h1>
-            <br>
-            <h4>Inserir funcionário no banco:</h4>
-            <form action="insert_data.php" method="POST" class="form-group">
-                <input type="text" name="name" id="add-nome" placeholder="Nome">
-                <input type="text" name="lastName" id="add-sobrenome" placeholder="Sobrenome">
-                <input type="text" name="age" id="add-idade" placeholder="Idade">
-                <input type="date" name="entryDate" id="add-dataAdmissao" placeholder="Data de Admissão">
-                <input type="text" name="area" id="add-area" placeholder="Área">
-                <input type="text" name="salario" id="add-salario" placeholder="Salário">
-                <input type="submit" value="Cadastrar no banco" class="btn btn-primary">
-            </form>
-        </div>
 
+            <br>
+
+            <div style="text-align: center;">
+                <hr style="border-top: 2px solid black; width: 80%; margin: 10px auto;">
+            </div>
+
+            <br>
+
+            <h4>Inserir funcionário no banco:</h4>
+            <form action="insert_data.php" method="POST" class="form-group" id="myForm">
+                <div style="display: flex; justify-content: center;">
+                    <div style="margin-right: 10px;">
+                        <input type="text" name="name" id="add-nome" placeholder="Nome"><br>
+                        <input type="text" name="lastName" id="add-sobrenome" placeholder="Sobrenome"><br>
+                    </div>
+                    <div style="margin-right: 10px;">
+                        <input type="text" name="age" id="add-idade" placeholder="Idade"><br>
+                        <input type="date" name="entryDate" id="add-dataAdmissao" placeholder="Data de Admissão"><br>
+                    </div>
+                    <div style="margin-left: 10px;">
+                        <input type="text" name="area" id="add-area" placeholder="Área"><br>
+                        <input type="text" name="salario" id="add-salario" placeholder="Salário"><br>
+                    </div>
+                </div>
+                <br>
+                <div style="text-align: center;">
+                    <input type="submit" value="Cadastrar no banco" class="btn btn-primary">
+                </div>
+            </form>
+            
+            <script>
+                document.getElementById("myForm").addEventListener("submit", function(event) {
+                    // Verifica se todos os campos estão preenchidos
+                    var nome = document.getElementById("add-nome").value.trim();
+                    var sobrenome = document.getElementById("add-sobrenome").value.trim();
+                    var idade = document.getElementById("add-idade").value.trim();
+                    var dataAdmissao = document.getElementById("add-dataAdmissao").value.trim();
+                    var area = document.getElementById("add-area").value.trim();
+                    var salario = document.getElementById("add-salario").value.trim();
+            
+                    if (!nome || !sobrenome || !idade || !dataAdmissao || !area || !salario) {
+                        alert("Por favor, preencha todos os campos.");
+                        event.preventDefault(); // Impede o envio do formulário
+                    }
+                });
+            </script>
+            
+            
+        </div>
+        
         <br>
 
         <!-- BOTÕES DA TABELA -->
         <div class="BotoesTabela" style="display: flex;">
-            <button id="updateTableBtn" style="display: block; margin: 0 auto; margin-bottom: 10px;">Atualizar Tabela</button>
+            
+            <button id="updateTableBtn" style="display: block; margin: 0 auto; margin-bottom: 10px;">Mostrar Tabela</button>
+            <button id="HideSections" style="display: none; margin: 0 auto; margin-bottom: 10px;">Ocultar Tabela</button>
             <button id="CleanTableBtn" style="display: block; margin: 0 auto; margin-bottom: 10px;">Apagar tabela</button>
 
             <!-- SCRIPT: CleanTableBtn-->
@@ -58,6 +98,14 @@
                     };
                     xhr.open("POST", "truncate_table.php", true);
                     xhr.send();
+                });
+            </script>
+
+            <script>
+                document.getElementById("HideSections").addEventListener("click", function() {
+                    document.getElementById("sectioGraphics").style.display = "none";
+                    document.getElementById("showTable").style.display = "none";
+                    document.getElementById("HideSections").style.display = "none";
                 });
             </script>
 
@@ -82,7 +130,6 @@
                                         "</tr>";
                                     tableBody.insertAdjacentHTML("beforeend", row);
                                 });
-                                document.querySelector(".GRAPHICSECTION").style.display = "block";
                             } else {
                                 console.error("Failed to fetch data:", xhr.statusText);
                             }
@@ -95,15 +142,21 @@
 
         </div>
 
-        <br>
+        <!-- LINHA DIVISÓRIA SEÇÃO -->  
+        <div style="text-align: center;">
+            <br>
+            <hr style="border-top: 2px solid black; width: 80%; margin: 10px auto;">
+            <br>
+        </div>
 
         <!-- TABELA PARA APRESENTAR DADOS -->
-        <div class="TabelaOutput">
+        <div class="TabelaOutput" id="showTable" style="display: none;">
+
             <h4 style="justify-content: center; margin-top: 10px;">Funcionários cadastrados:</h4>
 
             <br>
 
-            <table id="employeeTable" class="EmployeeTable table table-striped">
+            <table id="employeeTable" class="EmployeeTable table table-striped" style="margin: 0 auto;">
                 <thead class="thead-dark">
                     <tr>
                         <th>Nome</th>
@@ -119,12 +172,24 @@
         </div>
 
         <!-- DIV GRÁFICOS -->
-        <div class="GRAPHICSECTION" style="justify-content: center; text-align: center; display: none;">
+        <div class="GRAPHICSECTION" id="sectioGraphics" style="justify-content: center; text-align: center; display: none; flex-wrap: wrap;">
+            
+            <br>
+            <div style="text-align: center;">
+                <hr style="border-top: 2px solid black; width: 80%; margin: 10px auto;">
+            </div>
+            <br>
             <br>
             <h4>Funcionários/Faixa Etária</h4>
             <br>
-            <img id="graphicImg" style="display: none; margin: 0 auto; text-align: center;" src="" alt="IMAGEM">
-            <!-- SCRIPT: graphicBtn -->
+            <img id="graphic1" style="margin: 0 auto;" src="" alt="IMAGEM">
+            <br><br>
+            <h4>Média Salarial/Área</h4>
+            <br>           
+            <img id="graphic2" style="margin: 0 auto;" src="" alt="IMAGEM">
+        
+
+            <!-- SCRIPT: graphic1 and graphic 2 -->
             <script>
                 document.getElementById("updateTableBtn").addEventListener("click", function() {
                     var xhr = new XMLHttpRequest();
@@ -134,8 +199,10 @@
                             if (xhr.status === 200) {
                                 var responseData = JSON.parse(xhr.responseText);
                                 console.log(responseData.base64);
-                                document.getElementById("graphicImg").src = responseData.base64;
-                                document.getElementById("graphicImg").style.display = "block";
+                                document.getElementById("graphic1").src = responseData.base64;
+                                document.getElementById("sectioGraphics").style.display = "block";
+                                document.getElementById("showTable").style.display = "block";
+                                document.getElementById("HideSections").style.display = "block";
                             } else {
                                 console.error("Falha ao buscar dados:", xhr.statusText);
                             }
@@ -144,7 +211,26 @@
                     xhr.open("GET", "create_graphics.php", true);
                     xhr.send();
                 });
+
+                document.getElementById("updateTableBtn").addEventListener("click", function() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        console.log(xhr.readyState + "\n" + XMLHttpRequest.DONE);
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            if (xhr.status === 200) {
+                                var responseData = JSON.parse(xhr.responseText);
+                                console.log(responseData.base64);
+                                document.getElementById("graphic2").src = responseData.base64;
+                            } else {
+                                console.error("Falha ao buscar dados:", xhr.statusText);
+                            }
+                        }
+                    };
+                    xhr.open("GET", "create_pizza.php", true);
+                    xhr.send();
+                });
             </script>
+
         </div>
 
     </div>

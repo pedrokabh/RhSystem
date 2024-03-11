@@ -33,8 +33,8 @@ try {
     }
 
     // Determinar a altura e a largura da imagem
-    $largura = 400;
-    $altura = 320;
+    $largura = 1000;
+    $altura = 400;
     
     // Criar uma nova imagem
     $img = imagecreatetruecolor($largura, $altura);
@@ -42,8 +42,14 @@ try {
     // Definir cores
     $branco = imagecolorallocate($img, 255, 255, 255);
     $preto = imagecolorallocate($img, 0, 0, 0);
-    $azul = imagecolorallocate($img, 0, 0, 255);
-    
+    $cores_barras = array(
+        imagecolorallocate($img, 0, 0, 255),   // Azul
+        imagecolorallocate($img, 255, 0, 0),   // Vermelho
+        imagecolorallocate($img, 0, 255, 0),   // Verde
+        imagecolorallocate($img, 255, 255, 0), // Amarelo
+        imagecolorallocate($img, 255, 165, 0)  // Laranja
+    );
+
     // Preencher o fundo com branco
     imagefilledrectangle($img, 0, 0, $largura, $altura, $branco);
     
@@ -61,11 +67,15 @@ try {
     
     // Desenhar as barras
     for ($i = 0; $i < count($idades); $i++) {
-        $x1 = $margem_esquerda + $i * ($largura_barra+10);
+        // Selecionar a cor da barra
+        $cor = isset($cores_barras[$i]) ? $cores_barras[$i] : $preto;
+
+        // Desenhar a barra com a cor selecionada
+        $x1 = $margem_esquerda + $i * ($largura_barra + 10);
         $y1 = $altura - $margem_inferior;
         $x2 = $x1 + $largura_barra;
         $y2 = $altura - $margem_inferior - $qtdeFuncionarios[$i] * $altura_barra;
-        imagefilledrectangle($img, $x1, $y1, $x2, $y2, $azul);
+        imagefilledrectangle($img, $x1, $y1, $x2, $y2, $cor);
         
         // Adicionar texto com a categoria
         $categoria = $idades[$i];
