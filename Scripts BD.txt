@@ -1,0 +1,46 @@
+@DATABASE = erhemunerar
+@TABELA = funcionarios
+-- 
+CREATE database erhemunerar;
+
+--
+USE erhemunerar;
+
+--
+CREATE TABLE funcionarios (
+    ID int PRIMARY KEY AUTO_INCREMENT,
+    Name varchar(45) not null,
+    SecondName varchar(45) not null,
+    Idade int not null,
+    DataAdmissao date not null,
+    Area varchar(45) not null,
+    Salario float not null
+);
+
+--
+INSERT INTO funcionarios (Name, SecondName, Idade, DataAdmissao, Area, Salario) VALUES
+('João', 'Silva', 30, '2020-01-15', 'TI', 5000),
+('Maria', 'Santos', 37, '2019-05-20', 'Recursos Humanos', 4500),
+('Pedro', 'Ferreira', 35, '2018-11-10', 'Financeiro', 6000),
+('Ana', 'Martins', 28, '2021-02-28', 'Marketing', 4800),
+('Carlos', 'Oliveira', 33, '2017-09-03', 'Devops', 5500),
+('Mariana', 'Costa', 27, '2020-07-12', 'Vendas', 5200),
+('Rafael', 'Ramos', 45, '2019-03-25', 'TI', 5100),
+('Juliana', 'Pereira', 29, '2018-08-18', 'Recursos Humanos', 4700),
+('Gustavo', 'Almeida', 23, '2022-01-10', 'Financeiro', 6200),
+('Fernanda', 'Rodrigues', 26, '2020-04-05', 'Marketing', 4900),
+('Lucas', 'Nascimento', 34, '2017-12-30', 'Devops', 5700),
+('Patrícia', 'Gomes', 30, '2019-10-22', 'Vendas', 5300),
+('Rodrigo', 'Lima', 28, '2018-06-15', 'TI', 5200),
+('Aline', 'Dias', 33, '2021-08-02', 'Recursos Humanos', 4800),
+('Felipe', 'Soares', 55, '2017-11-11', 'Financeiro', 6100),
+('Camila', 'Mendes', 27, '2020-03-08', 'Marketing', 5000),
+('Anderson', 'Oliveira', 35, '2019-09-17', 'Devops', 5800),
+('Larissa', 'Martins', 31, '2018-05-24', 'Vendas', 5400),
+('Marcelo', 'Silveira', 57, '2021-12-01', 'TI', 5300),
+('Isabela', 'Fernandes', 60, '2018-10-07', 'Recursos Humanos', 4900);
+
+
+--
+select * from funcionarios;
+
