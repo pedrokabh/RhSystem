@@ -1,7 +1,7 @@
 # Projeto RhSystem
 
 ### Objetivo do Projeto
-O projeto RhSystem visa criar uma aplicação web para gerenciar informações de funcionários, incluindo o cadastro, visualização e análise de dados. Ele oferece funcionalidades como inserção de novos funcionários, atualização da tabela de funcionários, remoção de dados da tabela e geração de gráficos para análise da distribuição etária dos funcionários.
+O projeto RhSystem visa criar uma aplicação web para gerenciar informações de funcionários, incluindo o cadastro, visualização e análise de dados. Ele oferece funcionalidades como inserção de novos funcionários, atualização da tabela de funcionários, remoção de dados da tabela e geração de gráficos para análise da distribuição etária dos funcionários. *É uma aplicação bem básica solicitada como teste de conhecimento para uma vaga de emprego.*
 
 ## Tecnologias Utilizadas
 - HTML: Linguagem de marcação para estruturar o conteúdo da página web.
